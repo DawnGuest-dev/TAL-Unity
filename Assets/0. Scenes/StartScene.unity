@@ -1005,6 +1005,7 @@ GameObject:
   - component: {fileID: 635581999}
   - component: {fileID: 635581998}
   - component: {fileID: 635581997}
+  - component: {fileID: 635582000}
   m_Layer: 0
   m_Name: TALManager
   m_TagString: Untagged
@@ -1065,6 +1066,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameDataManager: {fileID: 0}
   userDataManager: {fileID: 0}
+--- !u!114 &635582000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635581995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da20c7971ad3be4e87daf6958424293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentScene: 0
 --- !u!1 &1474294959
 GameObject:
   m_ObjectHideFlags: 0
