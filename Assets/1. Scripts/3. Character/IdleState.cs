@@ -3,12 +3,12 @@ using UnityEngine;
 public class IdleState : IState
 {
     private readonly StateMachine _stateMachine;
-    private readonly Rigidbody _rb;
+    private readonly CharacterController _cc;
 
-    public IdleState(StateMachine stateMachine, Rigidbody rb)
+    public IdleState(StateMachine stateMachine, CharacterController characterController)
     {
         _stateMachine = stateMachine;
-        _rb = rb;
+        _cc = characterController;
     }
 
     public void Enter()
@@ -20,7 +20,7 @@ public class IdleState : IState
     {
         if (_stateMachine.moveInput.magnitude != 0f)
         {
-            _stateMachine.ChangeState(new MoveState(_stateMachine, _rb));
+            _stateMachine.ChangeState(new MoveState(_stateMachine, _cc));
         }
     }
 
