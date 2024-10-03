@@ -14,13 +14,18 @@ public class StateMachine : MonoBehaviour
     public bool isSprinting;
     private float _sprintStartTime;
     public float sprintThreshold = 0.5f;
+    public float gravity = -9.81f;
     
     public Vector2 moveInput;
     
     private Animator animator;
+    private CharacterController _cc;
 
     private void Awake()
     {
+        _cc = GetComponent<CharacterController>();
+        animator = GetComponentInChildren<Animator>();
+        
         moveAction = InputSystem.actions.FindAction("Move");
         sprintAction = InputSystem.actions.FindAction("Sprint");
         
@@ -36,9 +41,7 @@ public class StateMachine : MonoBehaviour
     {
         stateObserver = new StateObserver();
         
-        animator = GetComponentInChildren<Animator>();
-        
-        ChangeState(new IdleState(this, GetComponent<CharacterController>()));
+        ChangeState(new IdleState(this, _cc));
     }
 
     private void OnSprintPerformed(InputAction.CallbackContext context)
@@ -75,10 +78,22 @@ public class StateMachine : MonoBehaviour
         stateObserver.NotifyStateChanged(currentState);
     }
 
+    private Vector3 velocity;
+
     private void Update()
     {
         moveInput = moveAction.ReadValue<Vector2>();
         animator.SetFloat("Blend", moveInput.magnitude);
+
+        if (!_cc.isGrounded)
+        {
+            velocity.y += gravity * Time.deltaTime;
+        }else if (velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
+        
+        _cc.Move(velocity * Time.deltaTime);
 
         currentState?.Update();
     }
