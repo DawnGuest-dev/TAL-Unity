@@ -752,6 +752,7 @@ MonoBehaviour:
   sprintThreshold: 0.5
   gravity: -9.81
   moveInput: {x: 0, y: 0}
+  blendSpeed: 20
 --- !u!143 &1330647147
 CharacterController:
   m_ObjectHideFlags: 0

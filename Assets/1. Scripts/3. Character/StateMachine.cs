@@ -79,11 +79,15 @@ public class StateMachine : MonoBehaviour
     }
 
     private Vector3 velocity;
+    private float currentBlendValue = 0.0f;
+    public float blendSpeed = 5.0f;
 
     private void Update()
     {
         moveInput = moveAction.ReadValue<Vector2>();
-        animator.SetFloat("Blend", moveInput.magnitude);
+        float targetBlendValue = moveInput.magnitude;
+        currentBlendValue = Mathf.Lerp(currentBlendValue, targetBlendValue, Time.deltaTime * blendSpeed);
+        animator.SetFloat("Blend", currentBlendValue);
 
         if (!_cc.isGrounded)
         {
